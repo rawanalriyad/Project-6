@@ -1,10 +1,31 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:project6/Add_Recipe/add_recipe.dart';
 import 'package:project6/Home/RecipeCard.dart';
 import 'package:project6/Home/custom_rawer.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<Map<String, dynamic>> recipes = []; // قائمة الوصفات المضافة
+
+  // وظيفة لإضافة وصفة جديدة
+  void _addNewRecipe(
+      XFile image, String recipeTitle, String recipeDescription) {
+    setState(() {
+      recipes.add({
+        'recipeTitle': recipeTitle,
+        'imageUrl': image.path,
+        'description': recipeDescription,
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -12,18 +33,24 @@ class HomePage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-         actions: [
+        actions: [
           IconButton(
             icon: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
+            onPressed: () async {
+              final Map<String, dynamic>? newRecipe = await Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const AddRecipePage()),
               );
+              if (newRecipe != null) {
+                _addNewRecipe(
+                  newRecipe['image'],
+                  newRecipe['recipeTitle'],
+                  newRecipe['recipeDescription'],
+                );
+              }
             },
           ),
         ],
-      
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
@@ -38,7 +65,7 @@ class HomePage extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      drawer: Drawer(child: CustomDrawer()),
+      drawer: const Drawer(child: CustomDrawer()), // قائمة جانبية
       body: Stack(
         children: [
           Align(
@@ -49,7 +76,7 @@ class HomePage extends StatelessWidget {
                 topRight: Radius.circular(50),
               ),
               child: Container(
-                height: screenSize.height * 0.7,
+                height: screenSize.height * 0.6,
                 width: screenSize.width,
                 color: Colors.blueAccent.withOpacity(0.7),
               ),
@@ -60,31 +87,24 @@ class HomePage extends StatelessWidget {
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: ListView(
-                    children: const [
-                      RecipeCard(
-                        recipeTitle: 'Burger',
-                        imageUrl:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLvk2v9KKSMy93OkaOX5WTkKjDH2kAyTfOoQ&s',
-                        description:
-                            'A juicy burger with melted cheese and fresh ingredients.',
-                      ),
-                      RecipeCard(
-                        recipeTitle: 'Chicken Curry',
-                        imageUrl:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLvk2v9KKSMy93OkaOX5WTkKjDH2kAyTfOoQ&s',
-                        description:
-                            'A flavorful chicken curry with aromatic spices.',
-                      ),
-                      RecipeCard(
-                        recipeTitle: 'Chocolate Cake',
-                        imageUrl:
-                            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTLvk2v9KKSMy93OkaOX5WTkKjDH2kAyTfOoQ&s',
-                        description:
-                            'A delicious chocolate cake that\'s rich and moist.',
-                      ),
-                    ],
-                  ),
+                  child: recipes.isEmpty
+                      ? const Center(
+                          child: Text(
+                            'No recipes yet. Add some!',
+                            style: TextStyle(fontSize: 18, color: Colors.grey),
+                          ),
+                        )
+                      : ListView.builder(
+                          itemCount: recipes.length,
+                          itemBuilder: (context, index) {
+                            final recipe = recipes[index];
+                            return RecipeCard(
+                              recipeTitle: recipe['recipeTitle'],
+                              imageFile: File(recipe['imageUrl']),
+                              description: recipe['description'],
+                            );
+                          },
+                        ),
                 ),
               ),
             ],
