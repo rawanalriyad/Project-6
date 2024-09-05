@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:project6/Login/text_feld_user.dart';
 import 'package:project6/Login/text_feld_pass.dart';
 
-import 'package:project6/Login/text_feld_user.dart';
-import 'package:project6/Singup/singup.dart';
-
-class LoginForm extends StatelessWidget {
-  const LoginForm({super.key});
+class SignUpForm extends StatelessWidget {
+  const SignUpForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     final TextEditingController usernameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
 
     return Container(
       width: 337,
@@ -33,6 +32,16 @@ class LoginForm extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           const Text(
+            'Email',
+            style: TextStyle(color: Colors.white, fontSize: 19),
+          ),
+          const SizedBox(height: 8),
+          CustomTextFieldUsername(
+            hintText: 'Enter your email',
+            controller: emailController,
+          ),
+          const SizedBox(height: 16),
+          const Text(
             'Password',
             style: TextStyle(color: Colors.white, fontSize: 19),
           ),
@@ -41,16 +50,7 @@ class LoginForm extends StatelessWidget {
             hintText: 'Enter your password',
             controller: passwordController,
           ),
-          Align(
-            alignment: Alignment.topRight,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                'Forget password?',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ),
+          const SizedBox(height: 16),
           Align(
             alignment: Alignment.bottomCenter,
             child: ElevatedButton(
@@ -66,30 +66,10 @@ class LoginForm extends StatelessWidget {
               ),
               onPressed: () {},
               child: const Text(
-                'Login',
+                'Sign Up',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16,
-                ),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          Align(
-            alignment: Alignment.center,
-            child: TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const SignUp()),
-                );
-              },
-              child: const Text(
-                "Sign up",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
                 ),
               ),
             ),
