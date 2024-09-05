@@ -36,6 +36,7 @@ class CustomTextFieldUsername extends StatelessWidget {
         if (controller.text.isEmpty) {
           return 'Kindly Enter your Password';
         }
+        return null;
       },
       style: const TextStyle(color: Color(0xff006D77)),
     );
