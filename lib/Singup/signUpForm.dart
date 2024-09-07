@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project6/Login/text_feld_pass.dart';
-import 'package:project6/Login/text_feld_user.dart';
+import 'package:project6/Singup/customTextFieldPassword.dart';
+import 'package:project6/Singup/customTextFieldUsername%20copy.dart';
+import 'package:project6/Singup/customTextFieldUsername.dart';
 import 'package:project6/theme/app_colors.dart';
 
 class SignUpForm extends StatelessWidget {
@@ -35,7 +36,7 @@ class SignUpForm extends StatelessWidget {
             style: TextStyle(color: AppColors.lighthread, fontSize: 19),
           ),
           const SizedBox(height: 8),
-          CustomTextFieldUsername(
+          CustomSignUpTextFieldUsername(
             hintText: 'Enter your username',
             controller: usernameController,
           ),
@@ -45,7 +46,7 @@ class SignUpForm extends StatelessWidget {
             style: TextStyle(color: AppColors.lighthread, fontSize: 19),
           ),
           const SizedBox(height: 8),
-          CustomTextFieldUsername(
+          CustomTextFieldEmail(
             hintText: 'Enter your email',
             controller: emailController,
           ),
@@ -55,7 +56,7 @@ class SignUpForm extends StatelessWidget {
             style: TextStyle(color: AppColors.lighthread, fontSize: 19),
           ),
           const SizedBox(height: 8),
-          CustomTextFieldPassword(
+          CustomSignUpTextFieldPassword(
             hintText: 'Enter your password',
             controller: passwordController,
           ),

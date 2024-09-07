@@ -43,32 +43,45 @@ class Login extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ShaderMask(
-                  shaderCallback: (bounds) => const LinearGradient(
-                    colors: [
-                      AppColors.lighthread,
-                      AppColors.darkread,
-                    ],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ).createShader(bounds),
-                  child: Text(
-                    'Welcome back',
-                    style: GoogleFonts.lora(
-                      fontSize: 30,
-                      color: Colors
-                          .white, // The color is ignored due to the ShaderMask
-                      fontWeight: FontWeight.bold,
+                Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Welcome',
+                          style: GoogleFonts.lora(
+                            fontSize: 30,
+                            color: Colors
+                                .red, // The color is ignored due to the ShaderMask
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Container(
+                            width: 50,
+                            height: 50,
+                            child: Image(image: AssetImage('assets/chef.png'))),
+                        Text(
+                          'back',
+                          style: GoogleFonts.lora(
+                            fontSize: 30,
+                            color: Colors
+                                .red, // The color is ignored due to the ShaderMask
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
+                  ],
                 ),
                 SizedBox(
-                  height: screenSize.height * 0.08,
+                  height: screenSize.height * 0.05,
                 ),
                 SizedBox(
                   width: screenSize.width * 0.8,
                   child: const LoginForm(),
                 ),
+                // Container(child: Image(image: AssetImage('assets/pasta.webp'))),
               ],
             ),
           ),

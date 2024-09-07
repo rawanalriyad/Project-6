@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:project6/theme/app_colors.dart';
 
-class CustomSignUpTextFieldUsername extends StatelessWidget {
+/**
+ * This is a custom text field for ------email input----------.
+ */
+class CustomTextFieldEmail extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
 
-  const CustomSignUpTextFieldUsername({
+  const CustomTextFieldEmail({
     super.key,
     required this.hintText,
     required this.controller,
@@ -14,9 +17,9 @@ class CustomSignUpTextFieldUsername extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      elevation: 4, // Controls the depth of the shadow
-      shadowColor: Colors.black.withOpacity(0.3), // Color of the shadow
-      borderRadius: BorderRadius.circular(8), // Rounded corners for shadow
+      elevation: 4, // Creates the shadow
+      shadowColor: Colors.black.withOpacity(0.3), // Adjust the shadow color
+      borderRadius: BorderRadius.circular(8), // Apply the border radius
       child: TextFormField(
         controller: controller,
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -35,8 +38,13 @@ class CustomSignUpTextFieldUsername extends StatelessWidget {
           ),
         ),
         validator: (value) {
-          if (controller.text.isEmpty) {
-            return 'Please enter your name';
+          if (value == null || value.isEmpty) {
+            return 'please enter your email';
+          }
+
+          // Simple email validation regex
+          if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+            return 'Please enter a valid email address \n(e.g., example@example.com)';
           }
           return null;
         },

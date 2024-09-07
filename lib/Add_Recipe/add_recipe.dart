@@ -98,7 +98,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
 
               // Recipe name input
               const Text(
-                'Recipe Name',
+                ' Name :',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -111,6 +111,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
                   filled: true,
                   fillColor: AppColors.white,
                   hintText: 'Enter the recipe name',
+                  hintStyle: TextStyle(color: Colors.grey),
                   contentPadding: const EdgeInsets.all(16),
                 ),
               ),
@@ -118,7 +119,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
 
               // Recipe description input
               const Text(
-                'Recipe Description',
+                ' Description :',
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
@@ -132,6 +133,7 @@ class _AddRecipePageState extends State<AddRecipePage> {
                   filled: true,
                   fillColor: AppColors.white,
                   hintText: 'Enter the recipe description',
+                  hintStyle: TextStyle(color: Colors.grey),
                   contentPadding: const EdgeInsets.all(16),
                 ),
               ),
